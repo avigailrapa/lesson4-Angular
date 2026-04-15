@@ -1,0 +1,16 @@
+<h2>Add Question</h2>
+
+<div>
+  <input [(ngModel)]="questionText" placeholder="Enter question" />
+</div>
+
+@for (ans of answers; track $index) {
+  <input [(ngModel)]="answers[$index]" placeholder="Answer {{ $index + 1 }}" />
+}
+
+<div>
+  <label>Correct Answer (0-3):</label>
+  <input type="number" [(ngModel)]="correctAnswer" />
+</div>
+
+<button (click)="addQuestion()">Add Question</button>
