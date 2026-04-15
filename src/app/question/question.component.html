@@ -1,3 +1,8 @@
 <h2>{{ question().question }}</h2>
-<p>Possible answers:{{ question().answers }}</p>
+<p>Possible answers:</p>
+<ul>
+  @for (answer of question().answers; track $index) {
+    <li>{{ $index + 1 }}. {{ answer }}</li>
+  }
+</ul>
 <p>The correct answer:{{ question().correctAnswer + 1 }}</p>

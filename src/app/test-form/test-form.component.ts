@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Question } from '../models/question';
 import { FormsModule } from '@angular/forms';
-
+import { TriviaService } from '../shared/trivia.service';
 
 @Component({
   selector: 'app-test-form',
@@ -10,24 +10,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './test-form.component.scss',
 })
 export class TestFormComponent {
-  questionText: string = '';
-  answers: string[] = ['', '', '', ''];
-  correctAnswer: number = 0;
+  private readonly __triviaService = inject(TriviaService);
 
-  questions: Question[] = [];
+  newQuestion: Question = new Question('', ['', '', '', ''], 0);
 
   addQuestion() {
-    const newQuestion = new Question(
-      this.questionText,
-      this.answers as [string, string, string, string],
-      this.correctAnswer,
-    );
-
-    this.questions.push(newQuestion);
-    console.log(this.questions);
-
-    this.questionText = '';
-    this.answers = ['', '', '', ''];
-    this.correctAnswer = 0;
+    this.__triviaService.addQuestion(this.newQuestion);
+    this.newQuestion = new Question('', ['', '', '', ''], 0);
   }
 }

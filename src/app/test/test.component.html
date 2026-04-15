@@ -1,1 +1,11 @@
-<app-question [question]="myQuestion"></app-question>
+<p>the Questions: </p>
+  <button (click)="refreshQuestions()" class="btn-refresh">🔄 Refresh List</button>
+  
+@if (list) {
+  <h1>Trivia</h1>
+  @for (question of list; track question.id) {
+    <app-question [question]="question"></app-question>
+  }
+} @else {
+  <h1>no questions</h1>
+}

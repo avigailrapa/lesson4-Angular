@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Question } from '../models/question';
-import { QuestionComponent } from "../question/question.component";
+import { QuestionComponent } from '../question/question.component';
+import { TriviaService } from '../shared/trivia.service';
 
 @Component({
   selector: 'app-test',
@@ -9,9 +10,16 @@ import { QuestionComponent } from "../question/question.component";
   styleUrl: './test.component.scss',
 })
 export class TestComponent {
-  myQuestion: Question = new Question(
-    'What is the capital of Israel?',
-    ['Tel Aviv', 'Haifa', 'Jerusalem', 'Elad'],
-    2,
-  );
+  list?: Question[];
+  constructor(private readonly realAPI: TriviaService) {
+    this.refreshQuestions();
+  }
+  refreshQuestions() {
+    this.realAPI.getAllQuestions().subscribe({
+      next: (questionList) => {
+        this.list = questionList;
+      },
+      error: (err) => alert(err.message),
+    });
+  }
 }
