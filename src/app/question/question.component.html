@@ -1,8 +1,21 @@
-<h2>{{ question().question }}</h2>
-<p>Possible answers:</p>
-<ul>
-  @for (answer of question().answers; track $index) {
-    <li>{{ $index + 1 }}. {{ answer }}</li>
+<mat-card>
+  <mat-card-header>
+    <h2>{{ question().question }}</h2>
+  </mat-card-header>
+
+  <p>Possible answers:</p>
+  <mat-card-content>
+    @for (ans of question().answers; track $index) {
+      <button mat-stroked-button color="primary" class="answer-button" (click)="check(ans)">
+        {{ ans }}
+      </button>
+    }
+  </mat-card-content>
+  @if (userFeedBack !== undefined) {
+    <mat-card-footer class="feedback-footer">
+      <p [class.correct]="userFeedBack" [class.incorrect]="!userFeedBack">
+        {{ userFeedBack ? '✨ Well done!' : '❌ Try again' }}
+      </p>
+    </mat-card-footer>
   }
-</ul>
-<p>The correct answer:{{ question().correctAnswer + 1 }}</p>
+</mat-card>

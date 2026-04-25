@@ -1,0 +1,21 @@
+.form-card {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.answers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; // מסדר את התשובות בשני טורים
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+mat-card-actions {
+  padding: 16px;
+}

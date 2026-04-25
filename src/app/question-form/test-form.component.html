@@ -1,0 +1,43 @@
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title>Add New Question</mat-card-title>
+  </mat-card-header>
+
+  <form (ngSubmit)="addQuestion()">
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Question</mat-label>
+        <input matInput [(ngModel)]="newQuestion.question" name="question" required />
+      </mat-form-field>
+
+      <div class="answers-grid">
+        @for (ans of newQuestion.answers; track $index) {
+          <mat-form-field appearance="fill">
+            <mat-label>Answer {{ $index + 1 }}</mat-label>
+            <input
+              matInput
+              [(ngModel)]="newQuestion.answers[$index]"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </mat-form-field>
+        }
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Correct Answer (1-4)</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="newQuestion.correctAnswer"
+          name="correct"
+          min="0"
+          max="3"
+        />
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" type="submit">ADD QUESTION</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

@@ -1,0 +1,32 @@
+.question-card {
+  width: 30vw; 
+  min-width: 400px;      /* רוחב קבוע לכל שאלה */
+  min-height: 350px;  /* גובה מינימלי כדי לשמור על אחידות */
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between; /* דוחף את המשוב לתחתית הכרטיס */
+}
+
+/* התאמת הכפתורים שיהיו ברוחב מלא בתוך הכרטיס הקטן */
+.answers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 30px;
+  
+  .answer-button {
+    width: 100%;
+    white-space: normal; /* מאפשר לטקסט ארוך לרדת שורה בתוך הכפתור */
+    line-height: 1.2;
+    padding: 4px 8px;
+  }
+}
+
+.feedback-footer {
+  padding: 10px 16px;
+  font-weight: bold;
+  
+  .correct { color: #2e7d32; }   // ירוק להצלחה
+  .incorrect { color: #d32f2f; } // אדום לטעות
+}
