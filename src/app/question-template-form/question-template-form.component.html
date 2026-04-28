@@ -1,0 +1,69 @@
+<h1>template-driven-form</h1>
+<p>{{ questionForm.value | json }}</p>
+
+<form (ngSubmit)="addQuestion()" #questionForm="ngForm">
+  <div>
+    <label for="question">The Question: </label>
+    <input
+      type="text"
+      id="question"
+      name="question"
+      [(ngModel)]="newQuestion.question"
+      required
+      minlength="10"
+    />
+  </div>
+
+  @let q = questionForm.controls['question'];
+  @if (q?.invalid && q?.touched) {
+    <div class="errors">
+      @if (q?.hasError('required')) {
+        <p>question is required</p>
+      } @else if (q?.errors?.['minlength']) {
+        <p>
+          add
+          {{ q?.getError('minlength').requiredLength - q?.getError('minlength').actualLength }}
+          characters
+        </p>
+      }
+    </div>
+  }
+
+  <div>
+    <h3>Answers:</h3>
+    @for (ans of newQuestion.answers; track $index) {
+      <label>Answer {{ $index + 1 }}:</label>
+      <input
+        type="text"
+        name="answer_{{ $index }}"
+        [(ngModel)]="newQuestion.answers[$index]"
+        #ansModel="ngModel"
+        required
+      />
+      @if (ansModel.invalid && ansModel.touched) {
+        <p>Answer {{ $index + 1 }} is required</p>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="correctAnswer">Correct Answer (1-4): </label>
+    <input
+      type="number"
+      id="correctAnswer"
+      name="correctAnswer"
+      min="1"
+      max="4"
+      [(ngModel)]="newQuestion.correctAnswer"
+      #correctModel="ngModel"
+      required
+    />
+  </div>
+  @if (correctModel.invalid && correctModel.touched) {
+    <div class="errors">Please enter a number between 1 and 4</div>
+  }
+
+  <div>
+    <button [disabled]="questionForm.invalid">Add Question</button>
+  </div>
+</form>
